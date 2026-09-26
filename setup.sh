@@ -1,39 +1,61 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-echo "=============================="
-echo " Raspberry Pi Setup"
-echo "=============================="
+echo "================================"
+echo " Raspberry Pi Development Setup"
+echo "================================"
 
-echo "[1/6] Updating package lists..."
+echo
+echo "[1/4] Updating system..."
+
 sudo apt update
-
-echo "[2/6] Upgrading installed packages..."
 sudo apt upgrade -y
 
-echo "[3/6] Installing development tools..."
+echo
+echo "[2/4] Installing development tools..."
+
 sudo apt install -y \
     git \
     python3 \
     python3-pip \
     python3-venv
 
-echo "[4/6] Creating projects directory..."
-mkdir -p ~/projects
+echo
+echo "[3/4] Checking Git configuration..."
 
-echo "[5/6] Configuring Git..."
+if ! git config --global user.name >/dev/null; then
+    read -rp "Enter your Git name: " GIT_NAME
+    git config --global user.name "$GIT_NAME"
+else
+    echo "Git username already configured:"
+    git config --global user.name
+fi
 
-git config --global user.name "Your Name"
-git config --global user.email "YOUR_EMAIL@example.com"
-
-echo "[6/6] Setup complete!"
+if ! git config --global user.email >/dev/null; then
+    read -rp "Enter your Git email: " GIT_EMAIL
+    git config --global user.email "$GIT_EMAIL"
+else
+    echo "Git email already configured:"
+    git config --global user.email
+fi
 
 echo
-echo "Installed:"
+echo "[4/4] Verifying installation..."
+
+echo
+echo "Git:"
 git --version
-python3 --version
-pip3 --version
 
 echo
-echo "Your Pi is ready for development."
+echo "Python:"
+python3 --version
+
+echo
+echo "Pip:"
+python3 -m pip --version
+
+echo
+echo "================================"
+echo " Setup complete!"
+echo "================================"

@@ -1,0 +1,3 @@
+curl -fsSL https://raw.githubusercontent.com/OE-Green/pi_mini_tasks/main/bootstrap.sh -o bootstrap.sh
+chmod +x bootstrap.sh
+./bootstrap.sh
