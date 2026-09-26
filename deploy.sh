@@ -54,10 +54,10 @@ fi
 echo
 echo "[3/4] Installing dependencies..."
 
-if [ -f "requirements.txt" ]; then
-    .venv/bin/python -m pip install -r requirements.txt
+if [ -f "reqs.txt" ]; then
+    .venv/bin/python -m pip install -r reqs.txt
 else
-    echo "No requirements.txt found. Skipping dependency installation."
+    echo "No reqs.txt found. Skipping dependency installation."
 fi
 
 echo
