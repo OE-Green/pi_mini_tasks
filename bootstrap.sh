@@ -29,4 +29,6 @@ fi
 echo
 echo "Running setup..."
 cd "$REPO_DIR"
+
+chmod +x setup.sh
 ./setup.sh
